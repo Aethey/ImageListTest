@@ -1,4 +1,4 @@
-package com.example.imagelisttest.bean
+package com.example.imagelisttest.model
 
 data class Urls(
     val full: String,
