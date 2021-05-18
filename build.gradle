@@ -22,6 +22,8 @@ allprojects {
     }
 }
 
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
@@ -45,7 +47,5 @@ ext{
     junit = '4.+'
     androidxJunit = '1.1.2'
     espressoCore = '3.3.0'
-    mockwebserver = '4.7.2'
-    mockito = '3.+'
     glide = '4.12.0'
 }

@@ -11,9 +11,10 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Created by Ryu on 15,五月,2021
  */
-class PhotoRepository constructor(private val photoService: PhotoService) {
+class PhotoRepository constructor(private val photoService: PhotoService) :
+    PhotoRepositoryInterface {
 
-    fun getListPhotoStream(terms: String?): Flow<PagingData<Photo>> {
+    override fun getListPhotoStream(terms: String?): Flow<PagingData<Photo>> {
 
         return if (terms == null) {
             Pager(
@@ -21,7 +22,7 @@ class PhotoRepository constructor(private val photoService: PhotoService) {
                     pageSize = Config.NETWORK_PAGE_SIZE,
                     enablePlaceholders = false
                 ),
-                pagingSourceFactory = { PhotoPagingSource(photoService) }
+                pagingSourceFactory = { PhotoPagingSource(photoService).getPagingSourceData() }
             ).flow
         } else {
             Pager(

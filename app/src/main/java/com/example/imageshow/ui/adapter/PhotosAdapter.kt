@@ -18,7 +18,7 @@ import com.example.imageshow.model.Photo
  * Created by Ryu on 15,五月,2021
  */
 class PhotosAdapter(private val listener: OnItemClickListener) :
-    PagingDataAdapter<Photo, PhotosAdapter.PhotoListViewHolder>(REPO_COMPARATOR) {
+    PagingDataAdapter<Photo, PhotosAdapter.PhotoListViewHolder>(diffCallback) {
 
     /// item view type,0:List 1: Gird
     private var currentItemType = 0
@@ -68,7 +68,7 @@ class PhotosAdapter(private val listener: OnItemClickListener) :
     }
 
     companion object {
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Photo>() {
+         val diffCallback = object : DiffUtil.ItemCallback<Photo>() {
             override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean =
                 oldItem.id == newItem.id
 

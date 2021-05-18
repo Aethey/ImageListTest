@@ -1,4 +1,4 @@
-package com.example.imageshow.model
+package com.example.imageshow
 
 import com.example.imageshow.model.Photo
 import com.example.imageshow.model.Urls
@@ -10,11 +10,11 @@ import org.junit.Test
 /**
  * Created by Ryu on 18,五月,2021
  */
-class ModelTest{
+open class ModelTest{
 
     private lateinit var user: User
     private lateinit var urls: Urls
-    private lateinit var photo: Photo
+    open lateinit var photo: Photo
 
 
     @Before
@@ -28,20 +28,21 @@ class ModelTest{
     @Test
     fun userTest() {
         val userCopy = user.copy()
-        assertEquals("mockUN" , userCopy.username)
+        assertEquals(user.username , userCopy.username)
     }
 
     @Test
     fun urlsTest() {
         val urlsCopy = urls.copy()
-        assertEquals("mockFull",urlsCopy.full)
+        assertEquals(urls.full,urlsCopy.full)
     }
 
     @Test
     fun photoTest() {
         val photoCopy = photo.copy()
-        assertEquals("mockD",photoCopy.description)
-        assertEquals("mockThumb",photoCopy.urls.thumb)
-        assertEquals("mockN",photoCopy.user.name)
+        assertEquals(photo.description,photoCopy.description)
+        assertEquals(photo.urls.regular,photoCopy.urls.regular)
+        assertEquals(photo.urls.thumb,photoCopy.urls.thumb)
+        assertEquals(photo.user.name,photoCopy.user.name)
     }
 }

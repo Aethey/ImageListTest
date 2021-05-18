@@ -2,13 +2,13 @@ package com.example.imageshow.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.imageshow.data.PhotoRepository
+import com.example.imageshow.data.PhotoRepositoryInterface
 import java.lang.IllegalArgumentException
 
 /**
  * Created by Ryu on 15,五月,2021
  */
-class PhotoListViewModelFactory constructor(private val repository: PhotoRepository) :
+class PhotoListViewModelFactory constructor(private val repository: PhotoRepositoryInterface) :
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

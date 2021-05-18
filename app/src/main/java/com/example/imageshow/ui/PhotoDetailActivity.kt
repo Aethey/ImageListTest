@@ -88,7 +88,7 @@ class PhotoDetailActivity : AppCompatActivity() {
                 RequestOptions().skipMemoryCache(false).diskCacheStrategy(DiskCacheStrategy.ALL)
             }
             .load(fullUrl)
-            .listener(object : RequestListener<Drawable>{
+            .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
