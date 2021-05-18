@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ImageListTest</string>
+    <string name="app_name">ImageShow</string>
     <string name="toolbar_behavior">com.example.imagelisttest.ui.ToolBarBehavior</string>
     // String Resource
     <string name="photo_user_name">By: %1$s</string>

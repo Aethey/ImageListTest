@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".MainActivity">
+    tools:context="com.example.imageshow.MainActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image_thumbnail"
