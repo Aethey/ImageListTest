@@ -14,6 +14,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Query
 
 /**
+ * Created by Ryu on 15,五月,2021
  * Unsplash API communication setup via Retrofit.
  * doc: https://unsplash.com/documentation#list-photos
  */

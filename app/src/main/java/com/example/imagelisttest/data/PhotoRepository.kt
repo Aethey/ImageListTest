@@ -8,6 +8,9 @@ import com.example.imagelisttest.api.PhotoService
 import com.example.imagelisttest.model.Photo
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Created by Ryu on 15,五月,2021
+ */
 class PhotoRepository constructor(private val photoService: PhotoService) {
 
     fun getListPhotoStream(terms: String?): Flow<PagingData<Photo>> {

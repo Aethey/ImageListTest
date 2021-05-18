@@ -5,10 +5,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.imagelisttest.data.PhotoRepository
 import java.lang.IllegalArgumentException
 
-class PhotoListViewModelFactory constructor(private val repository: PhotoRepository): ViewModelProvider.Factory {
+/**
+ * Created by Ryu on 15,五月,2021
+ */
+class PhotoListViewModelFactory constructor(private val repository: PhotoRepository) :
+    ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(PhotoListViewModel::class.java)){
+        return if (modelClass.isAssignableFrom(PhotoListViewModel::class.java)) {
             PhotoListViewModel(this.repository) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")

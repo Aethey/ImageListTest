@@ -1,7 +1,8 @@
 package com.example.imagelisttest.model
 
 /**
- *
+ * Created by Ryu on 15,五月,2021
+ * unsplash Urls
  */
 data class Photo(
     val description: String,

@@ -14,12 +14,16 @@ import com.example.imagelisttest.R
 import com.example.imagelisttest.databinding.PhotoItemBinding
 import com.example.imagelisttest.model.Photo
 
-class PhotosAdapter(private val listener: OnItemClickListener) : PagingDataAdapter<Photo, PhotosAdapter.PhotoListViewHolder>(REPO_COMPARATOR) {
+/**
+ * Created by Ryu on 15,五月,2021
+ */
+class PhotosAdapter(private val listener: OnItemClickListener) :
+    PagingDataAdapter<Photo, PhotosAdapter.PhotoListViewHolder>(REPO_COMPARATOR) {
 
     /// item view type,0:List 1: Gird
     private var currentItemType = 0
 
-    fun setItemType(itemType: Int){
+    fun setItemType(itemType: Int) {
         currentItemType = itemType
     }
 
@@ -33,10 +37,13 @@ class PhotosAdapter(private val listener: OnItemClickListener) : PagingDataAdapt
     override fun onBindViewHolder(holder: PhotoListViewHolder, position: Int) {
         val photo = getItem(position)
         if (photo != null) {
-            if(currentItemType == 0){
+            if (currentItemType == 0) {
                 holder.binding.username.visibility = VISIBLE
                 holder.binding.description.visibility = VISIBLE
-                holder.binding.username.text = holder.binding.root.context.getString(R.string.photo_user_name,photo.user.username)
+                holder.binding.username.text = holder.binding.root.context.getString(
+                    R.string.photo_user_name,
+                    photo.user.username
+                )
                 holder.binding.description.text = photo.description
             } else {
                 holder.binding.username.visibility = GONE
@@ -48,11 +55,11 @@ class PhotosAdapter(private val listener: OnItemClickListener) : PagingDataAdapt
                     // Set of available caching strategies for image.
                     RequestOptions().skipMemoryCache(false).diskCacheStrategy(DiskCacheStrategy.ALL)
                 }
-                .load(photo.urls.small)
+                .load(photo.urls.thumb)
                 .into(holder.binding.itemImageview)
         }
         holder.binding.root.setOnClickListener {
-            listener.onItemClick(photo,holder.binding.itemImageview)
+            listener.onItemClick(photo, holder.binding.itemImageview)
         }
 
     }

@@ -7,8 +7,13 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imagelisttest.databinding.PhotosLoadStateFooterViewItemBinding
 
-class PhotosLoadStateViewHolder constructor(private val binding: PhotosLoadStateFooterViewItemBinding,
-                                            retry: () -> Unit): RecyclerView.ViewHolder(binding.root){
+/**
+ * Created by Ryu on 16,五月,2021
+ */
+class PhotosLoadStateViewHolder constructor(
+    private val binding: PhotosLoadStateFooterViewItemBinding,
+    retry: () -> Unit
+) : RecyclerView.ViewHolder(binding.root) {
 
     init {
         binding.retryButton.setOnClickListener { retry.invoke() }
@@ -27,7 +32,7 @@ class PhotosLoadStateViewHolder constructor(private val binding: PhotosLoadState
         fun create(parent: ViewGroup, retry: () -> Unit): PhotosLoadStateViewHolder {
 
             val inflater = LayoutInflater.from(parent.context)
-            val binding = PhotosLoadStateFooterViewItemBinding.inflate(inflater,parent,false)
+            val binding = PhotosLoadStateFooterViewItemBinding.inflate(inflater, parent, false)
 
             return PhotosLoadStateViewHolder(binding, retry)
         }

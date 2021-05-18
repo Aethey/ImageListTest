@@ -12,6 +12,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * Created by Ryu on 15,五月,2021
+ */
 class PhotoListViewModel constructor(private val photoRepository: PhotoRepository) : ViewModel() {
     /// current search terms
     private var currentTerms: String? = null

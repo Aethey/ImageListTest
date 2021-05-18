@@ -8,6 +8,9 @@ import com.example.imagelisttest.model.Photo
 import retrofit2.HttpException
 import java.io.IOException
 
+/**
+ * Created by Ryu on 17,五月,2021
+ */
 class PhotoSearchPagingSource constructor(
     private val service: PhotoService,
     private val terms: String

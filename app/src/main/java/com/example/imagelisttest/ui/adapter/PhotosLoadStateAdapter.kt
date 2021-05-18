@@ -4,7 +4,11 @@ import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 
-class PhotosLoadStateAdapter constructor(private val retry: () -> Unit): LoadStateAdapter<PhotosLoadStateViewHolder>() {
+/**
+ * Created by Ryu on 16,五月,2021
+ */
+class PhotosLoadStateAdapter constructor(private val retry: () -> Unit) :
+    LoadStateAdapter<PhotosLoadStateViewHolder>() {
     override fun onBindViewHolder(holder: PhotosLoadStateViewHolder, loadState: LoadState) {
         holder.bind(loadState)
     }
@@ -13,6 +17,6 @@ class PhotosLoadStateAdapter constructor(private val retry: () -> Unit): LoadSta
         parent: ViewGroup,
         loadState: LoadState
     ): PhotosLoadStateViewHolder {
-       return PhotosLoadStateViewHolder.create(parent,retry)
+        return PhotosLoadStateViewHolder.create(parent, retry)
     }
 }

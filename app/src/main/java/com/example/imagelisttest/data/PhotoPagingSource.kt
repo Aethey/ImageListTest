@@ -9,7 +9,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 /**
- * if query is null find photos else search photos
+ * Created by Ryu on 15,五月,2021
  */
 class PhotoPagingSource constructor(private val service: PhotoService) :
     PagingSource<Int, Photo>() {

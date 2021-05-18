@@ -11,26 +11,25 @@ import androidx.core.view.ViewCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.imagelisttest.Config
 import com.example.imagelisttest.databinding.ActivityPhotoDetailBinding
 
 /**
- * Created by yryu on 17,五月,2021
+ * Created by Ryu on 17,五月,2021
  */
 class PhotoDetailActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityPhotoDetailBinding
+    private val TAG = "PhotoDetailActivity"
+    private lateinit var binding: ActivityPhotoDetailBinding
     private lateinit var scaleGestureDetector: ScaleGestureDetector
     private var scaleFactor = 1.0f
     private lateinit var thumbnailUrl: String
     private lateinit var fullUrl: String
-
-    var IMAGE = "detail:image";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhotoDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-        title = "KotlinApp"
         thumbnailUrl = intent.getStringExtra("thumbnailUrl")
         fullUrl = intent.getStringExtra("fullUrl")
 
@@ -42,20 +41,21 @@ class PhotoDetailActivity : AppCompatActivity() {
          */
         ViewCompat.setTransitionName(
             binding.imageView,
-            IMAGE
+            Config.PHOTO_DETAIL_TRANSITION_NAME
         )
 
         loadImage()
         scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
 
     }
+
     override fun onTouchEvent(motionEvent: MotionEvent): Boolean {
         scaleGestureDetector.onTouchEvent(motionEvent)
         return true
     }
 
-    private fun loadImage(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && addTransitionListener()){
+    private fun loadImage() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && addTransitionListener()) {
             loadThumbnail()
         } else {
             loadFullSizeImage()
@@ -72,7 +72,7 @@ class PhotoDetailActivity : AppCompatActivity() {
             .into(binding.imageView)
     }
 
-    private fun loadFullSizeImage(){
+    private fun loadFullSizeImage() {
         Glide.with(this)
             .apply {
                 // Set of available caching strategies for image.
@@ -85,7 +85,7 @@ class PhotoDetailActivity : AppCompatActivity() {
     private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
         override fun onScale(scaleGestureDetector: ScaleGestureDetector): Boolean {
             scaleFactor *= scaleGestureDetector.scaleFactor
-            scaleFactor =Math.max(0.1f, Math.min(scaleFactor, 10.0f))
+            scaleFactor = Math.max(0.1f, Math.min(scaleFactor, 10.0f))
             binding.imageView.scaleX = scaleFactor
             binding.imageView.scaleY = scaleFactor
             return true
@@ -94,17 +94,16 @@ class PhotoDetailActivity : AppCompatActivity() {
 
     @RequiresApi(21)
     private fun addTransitionListener(): Boolean {
-        val transition: Transition = window.sharedElementExitTransition
-        transition.addListener(object: Transition.TransitionListener{
+        val transition: Transition = window.sharedElementEnterTransition
+        transition.addListener(object : Transition.TransitionListener {
             override fun onTransitionStart(p0: Transition?) {
+            }
+
+            override fun onTransitionEnd(p0: Transition?) {
                 // load the full-size image
                 loadFullSizeImage()
                 // remove ourselves as a listener
                 transition.removeListener(this)
-            }
-
-            override fun onTransitionEnd(p0: Transition?) {
-                TODO("Not yet implemented")
             }
 
             override fun onTransitionCancel(p0: Transition?) {
@@ -112,11 +111,9 @@ class PhotoDetailActivity : AppCompatActivity() {
             }
 
             override fun onTransitionPause(p0: Transition?) {
-                TODO("Not yet implemented")
             }
 
             override fun onTransitionResume(p0: Transition?) {
-                TODO("Not yet implemented")
             }
         })
         return true

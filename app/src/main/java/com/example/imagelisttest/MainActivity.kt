@@ -36,6 +36,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
+/**
+ * Created by Ryu on 13,五月,2021
+ */
 class MainActivity() : AppCompatActivity(), CoroutineScope {
     private val TAG = "MainActivity"
     private var job: Job = Job()
@@ -48,17 +51,18 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
 
     private val photoService = PhotoService.getInstance()
 
-    private val adapter = PhotosAdapter(object: OnItemClickListener{
+    private val adapter = PhotosAdapter(object : OnItemClickListener {
         override fun onItemClick(item: Photo?, view: AppCompatImageView) {
             val intent = Intent(applicationContext, PhotoDetailActivity::class.java).apply {
                 putExtra("thumbnailUrl", item?.urls?.thumb)
                 putExtra("fullUrl", item?.urls?.full)
             }
 
-            val activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity,
-                Pair(view,"detail:image")
+            val activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this@MainActivity,
+                Pair(view, Config.PHOTO_DETAIL_TRANSITION_NAME)
             )
-            ActivityCompat.startActivity(this@MainActivity,intent,activityOptions.toBundle())
+            ActivityCompat.startActivity(this@MainActivity, intent, activityOptions.toBundle())
         }
 
 
@@ -66,6 +70,7 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
 
     /// show by girdView
     private val girdLayoutManager = GridLayoutManager(this, 3)
+
     /// show by girdView as a listView
     private val listLayoutManager = GridLayoutManager(this, 1)
 
