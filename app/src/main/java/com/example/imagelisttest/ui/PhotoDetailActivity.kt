@@ -56,8 +56,10 @@ class PhotoDetailActivity : AppCompatActivity() {
 
     private fun loadImage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && addTransitionListener()) {
+            // at first show Thumbnail
             loadThumbnail()
         } else {
+            // Time for a true display of image
             loadFullSizeImage()
         }
     }
@@ -84,8 +86,9 @@ class PhotoDetailActivity : AppCompatActivity() {
 
     private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
         override fun onScale(scaleGestureDetector: ScaleGestureDetector): Boolean {
+            // zoom image
             scaleFactor *= scaleGestureDetector.scaleFactor
-            scaleFactor = Math.max(0.1f, Math.min(scaleFactor, 10.0f))
+            scaleFactor = maxOf(0.1f, minOf(scaleFactor, 10.0f))
             binding.imageView.scaleX = scaleFactor
             binding.imageView.scaleY = scaleFactor
             return true

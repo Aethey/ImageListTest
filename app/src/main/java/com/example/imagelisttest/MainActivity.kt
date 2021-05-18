@@ -87,6 +87,7 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
             )
         initAdapter()
         initSearch()
+        // for switch between list and gird
         initSwitchLayout()
         initList()
     }
