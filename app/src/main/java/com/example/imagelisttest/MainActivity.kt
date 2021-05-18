@@ -68,8 +68,8 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
 
     })
 
-    /// show by girdView
-    private val girdLayoutManager = GridLayoutManager(this, 3)
+    /// show by gridView
+    private val gridLayoutManager = GridLayoutManager(this, 3)
 
     /// show by girdView as a listView
     private val listLayoutManager = GridLayoutManager(this, 1)
@@ -87,7 +87,7 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
             )
         initAdapter()
         initSearch()
-        // for switch between list and gird
+        // for switch between list and grid
         initSwitchLayout()
         initList()
     }
@@ -95,7 +95,7 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
     private fun initList() {
         job.cancel()
         job = lifecycleScope.launch {
-            viewModel.getPhotoList("Android").collectLatest {
+            viewModel.getPhotoList(null).collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -143,9 +143,9 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
             binding.photoRecycleview.layoutManager = listLayoutManager
         }
 
-        binding.btnToGird.setOnClickListener {
+        binding.btnToGrid.setOnClickListener {
             adapter.setItemType(1)
-            binding.photoRecycleview.layoutManager = girdLayoutManager
+            binding.photoRecycleview.layoutManager = gridLayoutManager
         }
     }
 

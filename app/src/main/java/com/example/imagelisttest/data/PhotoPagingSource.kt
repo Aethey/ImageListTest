@@ -27,6 +27,7 @@ class PhotoPagingSource constructor(private val service: PhotoService) :
                 // ensure we're not requesting duplicating items, at the 2nd request
                 position + (params.loadSize / Config.NETWORK_PAGE_SIZE)
             }
+
             LoadResult.Page(
                 data = response,
                 prevKey = if (position == 1) null else position - 1,

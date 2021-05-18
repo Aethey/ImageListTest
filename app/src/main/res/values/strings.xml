@@ -4,4 +4,10 @@
     // String Resource
     <string name="photo_user_name">By: %1$s</string>
     <string name="search_photo">Search</string>
+    <string name="show_by_listview">show by listView</string>
+    <string name="show_by_gridview">show by GridView</string>
+    <string name="retry">retry</string>
+    <string name="timeout">timeout</string>
+    <string name="no_results">No Photos</string>
+
 </resources>

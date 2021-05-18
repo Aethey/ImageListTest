@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp">
+    android:layout_margin="@dimen/small"
+    app:cardCornerRadius="@dimen/small">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,18 +16,18 @@
             android:id="@+id/itemImageview"
             android:layout_width="match_parent"
             android:scaleType="centerCrop"
-            android:layout_height="200dp" />
+            android:layout_height="@dimen/item_view_common" />
 
         <TextView
             android:id="@+id/username"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:layout_gravity="bottom"
             android:textStyle="bold|italic"
             android:background="@color/gray"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:paddingHorizontal="8dp" />
+            android:paddingHorizontal="@dimen/small" />
 
         <TextView
             android:id="@+id/description"
@@ -38,8 +38,8 @@
             android:textColor="@color/black"
             android:background="@color/gray"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:paddingHorizontal="8dp"
-            android:paddingBottom="8dp"
+            android:paddingHorizontal="@dimen/small"
+            android:paddingBottom="@dimen/small"
             />
     </LinearLayout>
 

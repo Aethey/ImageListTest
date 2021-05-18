@@ -1,16 +1,23 @@
 package com.example.imagelisttest.ui
 
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.transition.Transition
+import android.util.Log
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.example.imagelisttest.Config
 import com.example.imagelisttest.databinding.ActivityPhotoDetailBinding
 
@@ -40,7 +47,7 @@ class PhotoDetailActivity : AppCompatActivity() {
          * querying from other Activities
          */
         ViewCompat.setTransitionName(
-            binding.imageView,
+            binding.imageThumbnail,
             Config.PHOTO_DETAIL_TRANSITION_NAME
         )
 
@@ -71,7 +78,7 @@ class PhotoDetailActivity : AppCompatActivity() {
                 RequestOptions().skipMemoryCache(false).diskCacheStrategy(DiskCacheStrategy.ALL)
             }
             .load(thumbnailUrl)
-            .into(binding.imageView)
+            .into(binding.imageThumbnail)
     }
 
     private fun loadFullSizeImage() {
@@ -81,16 +88,41 @@ class PhotoDetailActivity : AppCompatActivity() {
                 RequestOptions().skipMemoryCache(false).diskCacheStrategy(DiskCacheStrategy.ALL)
             }
             .load(fullUrl)
-            .into(binding.imageView)
+            .listener(object : RequestListener<Drawable>{
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    // when imageFull is load over imageFull show and imageThumbnail gone
+                    binding.imageFull.visibility = View.VISIBLE
+                    binding.imageThumbnail.visibility = View.GONE
+                    return false
+                }
+
+            })
+            .into(binding.imageFull)
     }
 
     private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
         override fun onScale(scaleGestureDetector: ScaleGestureDetector): Boolean {
             // zoom image
+            // just imageFull is zoomable
             scaleFactor *= scaleGestureDetector.scaleFactor
             scaleFactor = maxOf(0.1f, minOf(scaleFactor, 10.0f))
-            binding.imageView.scaleX = scaleFactor
-            binding.imageView.scaleY = scaleFactor
+            binding.imageFull.scaleX = scaleFactor
+            binding.imageFull.scaleY = scaleFactor
             return true
         }
     }

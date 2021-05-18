@@ -44,12 +44,11 @@ class PhotosAdapter(private val listener: OnItemClickListener) :
                     R.string.photo_user_name,
                     photo.user.username
                 )
-                holder.binding.description.text = photo.description
+                holder.binding.description.text = photo.description ?: "There is no description"
             } else {
                 holder.binding.username.visibility = GONE
                 holder.binding.description.visibility = GONE
             }
-            print("username" + photo.user.name)
             Glide.with(holder.itemView.context)
                 .apply {
                     // Set of available caching strategies for image.
