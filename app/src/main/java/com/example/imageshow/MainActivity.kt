@@ -141,12 +141,17 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
         binding.btnToList.setOnClickListener {
             adapter.setItemType(0)
             binding.photoRecycleview.layoutManager = listLayoutManager
+            listLayoutManager.scrollToPositionWithOffset(gridLayoutManager.findFirstCompletelyVisibleItemPosition(),10)
+
         }
 
         binding.btnToGrid.setOnClickListener {
             adapter.setItemType(1)
             binding.photoRecycleview.layoutManager = gridLayoutManager
+            gridLayoutManager.scrollToPositionWithOffset(listLayoutManager.findFirstCompletelyVisibleItemPosition(),10)
+
         }
+
     }
 
     private fun initSearch() {
