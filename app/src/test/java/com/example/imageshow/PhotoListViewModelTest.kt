@@ -62,6 +62,7 @@ class PhotoListViewModelTest {
         }
 
         assertEquals(photosMock.size, differ.snapshot().size)
+        assertEquals(photosMock[1].description, differ.snapshot()[1]?.description)
         job.cancel()
     }
 
