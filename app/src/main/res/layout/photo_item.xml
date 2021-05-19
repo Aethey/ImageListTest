@@ -13,7 +13,7 @@
         android:orientation="vertical"
         >
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/itemImageview"
+            android:id="@+id/item_imageview"
             android:layout_width="match_parent"
             android:scaleType="centerCrop"
             android:layout_height="@dimen/item_view_common" />

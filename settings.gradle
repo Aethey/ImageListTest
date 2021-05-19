@@ -1,2 +1,2 @@
-rootProject.name = "ImageListTest"
+rootProject.name = "ImageShow"
 include ':app'
