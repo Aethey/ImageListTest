@@ -54,7 +54,7 @@ class PhotosAdapter(private val listener: OnItemClickListener) :
                     // Set of available caching strategies for image.
                     RequestOptions().skipMemoryCache(false).diskCacheStrategy(DiskCacheStrategy.ALL)
                 }
-                .load(photo.urls.thumb)
+                .load(photo.urls.small)
                 .into(holder.binding.itemImageview)
         }
         holder.binding.root.setOnClickListener {

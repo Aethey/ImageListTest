@@ -54,7 +54,7 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
     private val adapter = PhotosAdapter(object : OnItemClickListener {
         override fun onItemClick(item: Photo?, view: AppCompatImageView) {
             val intent = Intent(applicationContext, PhotoDetailActivity::class.java).apply {
-                putExtra("thumbnailUrl", item?.urls?.thumb)
+                putExtra("smallUrl", item?.urls?.small)
                 putExtra("fullUrl", item?.urls?.full)
             }
 

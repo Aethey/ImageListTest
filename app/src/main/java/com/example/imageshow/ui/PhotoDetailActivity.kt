@@ -37,7 +37,7 @@ class PhotoDetailActivity : AppCompatActivity() {
         binding = ActivityPhotoDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-        thumbnailUrl = intent.getStringExtra("thumbnailUrl")
+        thumbnailUrl = intent.getStringExtra("smallUrl")
         fullUrl = intent.getStringExtra("fullUrl")
 
 
