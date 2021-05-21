@@ -143,12 +143,14 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
     private fun initSwitchLayout() {
 
         binding.btnToList.setOnClickListener {
+            if(listLayoutManager.spanCount == 1) return@setOnClickListener
             listLayoutManager.spanCount = 1
             TransitionManager.beginDelayedTransition(binding.photoRecycleview)
             adapter.notifyItemRangeChanged(0,adapter.itemCount - 1)
         }
 
         binding.btnToGrid.setOnClickListener {
+            if(listLayoutManager.spanCount == 3) return@setOnClickListener
             listLayoutManager.spanCount = 3
             TransitionManager.beginDelayedTransition(binding.photoRecycleview)
             adapter.notifyItemRangeChanged(0,adapter.itemCount - 1)
