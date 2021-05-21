@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.transition.TransitionManager
 import com.example.imageshow.ui.adapter.PhotosAdapter
 import com.example.imageshow.data.PhotoRepository
 import com.example.imageshow.api.PhotoService
@@ -51,6 +52,9 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
 
     private val photoService = PhotoService.getInstance()
 
+    /// show by girdView as a listView
+    private val listLayoutManager = GridLayoutManager(this, 1)
+
     private val adapter = PhotosAdapter(object : OnItemClickListener {
         override fun onItemClick(item: Photo?, view: AppCompatImageView) {
             val intent = Intent(applicationContext, PhotoDetailActivity::class.java).apply {
@@ -66,13 +70,13 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
         }
 
 
-    })
+    },listLayoutManager)
 
     /// show by gridView
     private val gridLayoutManager = GridLayoutManager(this, 3)
 
     /// show by girdView as a listView
-    private val listLayoutManager = GridLayoutManager(this, 1)
+//    private val listLayoutManager = GridLayoutManager(this, 1)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -139,19 +143,16 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
     private fun initSwitchLayout() {
 
         binding.btnToList.setOnClickListener {
-            adapter.setItemType(0)
-            binding.photoRecycleview.layoutManager = listLayoutManager
-            listLayoutManager.scrollToPositionWithOffset(gridLayoutManager.findFirstCompletelyVisibleItemPosition(),10)
-
+            listLayoutManager.spanCount = 1
+            TransitionManager.beginDelayedTransition(binding.photoRecycleview)
+            adapter.notifyItemRangeChanged(0,adapter.itemCount - 1)
         }
 
         binding.btnToGrid.setOnClickListener {
-            adapter.setItemType(1)
-            binding.photoRecycleview.layoutManager = gridLayoutManager
-            gridLayoutManager.scrollToPositionWithOffset(listLayoutManager.findFirstCompletelyVisibleItemPosition(),10)
-
+            listLayoutManager.spanCount = 3
+            TransitionManager.beginDelayedTransition(binding.photoRecycleview)
+            adapter.notifyItemRangeChanged(0,adapter.itemCount - 1)
         }
-
     }
 
     private fun initSearch() {
