@@ -53,7 +53,7 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
     private val photoService = PhotoService.getInstance()
 
     /// show by girdView as a listView
-    private val listLayoutManager = GridLayoutManager(this, 1)
+    private val layoutManager = GridLayoutManager(this, 1)
 
     private val adapter = PhotosAdapter(object : OnItemClickListener {
         override fun onItemClick(item: Photo?, view: AppCompatImageView) {
@@ -70,14 +70,7 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
         }
 
 
-    },listLayoutManager)
-
-    /// show by gridView
-    private val gridLayoutManager = GridLayoutManager(this, 3)
-
-    /// show by girdView as a listView
-//    private val listLayoutManager = GridLayoutManager(this, 1)
-
+    },layoutManager)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,7 +109,7 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
 
     private fun initAdapter() {
 
-        binding.photoRecycleview.layoutManager = listLayoutManager
+        binding.photoRecycleview.layoutManager = layoutManager
         binding.photoRecycleview.adapter = adapter.withLoadStateHeaderAndFooter(
             header = PhotosLoadStateAdapter { adapter.retry() },
             footer = PhotosLoadStateAdapter { adapter.retry() }
@@ -143,15 +136,15 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
     private fun initSwitchLayout() {
 
         binding.btnToList.setOnClickListener {
-            if(listLayoutManager.spanCount == 1) return@setOnClickListener
-            listLayoutManager.spanCount = 1
+            if(layoutManager.spanCount == 1) return@setOnClickListener
+            layoutManager.spanCount = 1
             TransitionManager.beginDelayedTransition(binding.photoRecycleview)
             adapter.notifyItemRangeChanged(0,adapter.itemCount - 1)
         }
 
         binding.btnToGrid.setOnClickListener {
-            if(listLayoutManager.spanCount == 3) return@setOnClickListener
-            listLayoutManager.spanCount = 3
+            if(layoutManager.spanCount == 3) return@setOnClickListener
+            layoutManager.spanCount = 3
             TransitionManager.beginDelayedTransition(binding.photoRecycleview)
             adapter.notifyItemRangeChanged(0,adapter.itemCount - 1)
         }
