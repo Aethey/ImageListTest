@@ -6,6 +6,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,7 +18,7 @@ import com.example.imageshow.model.Photo
 /**
  * Created by Ryu on 15,五月,2021
  */
-class PhotosAdapter(private val listener: OnItemClickListener) :
+class PhotosAdapter(private val listener: OnItemClickListener,private val layoutManager: GridLayoutManager) :
     PagingDataAdapter<Photo, PhotosAdapter.PhotoListViewHolder>(diffCallback) {
 
     /// item view type,0:List 1: Gird
@@ -35,9 +36,10 @@ class PhotosAdapter(private val listener: OnItemClickListener) :
     }
 
     override fun onBindViewHolder(holder: PhotoListViewHolder, position: Int) {
+
         val photo = getItem(position)
         if (photo != null) {
-            if (currentItemType == 0) {
+            if ( layoutManager.spanCount == 1) {
                 holder.binding.username.visibility = VISIBLE
                 holder.binding.description.visibility = VISIBLE
                 holder.binding.username.text = holder.binding.root.context.getString(

@@ -3,6 +3,8 @@
     <dimen name="small">8dp</dimen>
     <dimen name="image_button_common">48dp</dimen>
     <dimen name="item_view_common">200dp</dimen>
+    <dimen name="item_view_small">160dp</dimen>
+
     <dimen name="medium">12dp</dimen>
     <dimen name="notice_text">24sp</dimen>
 
